@@ -6,7 +6,7 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:24:39 by ooulcaid          #+#    #+#             */
-/*   Updated: 2024/06/21 17:03:02 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/21 22:55:03 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	parse_color(t_color *color, char *line)
 {
 	char	**splited;
 
-	if (!is_num(line[ft_strlen(line) - 1]))
+	if (!is_num(line[ft_strlen(line) - 2]))
 		return (0);
 	splited = ft_split(line, ',');
 	if (count(splited) != 3 && (!all_num(ft_strtrim(splited[0], " ")) \
@@ -54,20 +54,20 @@ int	valid_component(t_cub3d *cub, char *line)
 {
 	char	*trim;
 
-	trim = ft_strtrim(line, " ");
-	if (ft_strncmp(trim, "NO ", 3))
+	trim = ft_strtrim(line, " \n");
+	if (!ft_strncmp(trim, "NO ", 3))
 		return (parse_texture(cub, trim, 0), 1);
-	if (ft_strncmp(trim, "EA ", 3))
+	if (!ft_strncmp(trim, "EA ", 3))
 		return (parse_texture(cub, trim, 1), 1);
-	if (ft_strncmp(trim, "SO ", 3))
+	if (!ft_strncmp(trim, "SO ", 3))
 		return (parse_texture(cub, trim, 2), 1);
-	if (ft_strncmp(trim, "WE ", 3))
+	if (!ft_strncmp(trim, "WE ", 3))
 		return (parse_texture(cub, trim, 3), 1);
-	if (ft_strncmp(trim, "F ", 2))
+	if (!ft_strncmp(trim, "F ", 2))
 		return (parse_color(&cub->floor_color, ft_strchr(trim, ' ')));
-	if (ft_strncmp(trim, "C ", 2))
+	if (!ft_strncmp(trim, "C ", 2))
 		return (parse_color(&cub->ceiling_color, ft_strchr(trim, ' ')));
-	return (0);
+	return (free(trim), 0);
 }
 
 int	empty(char *str)

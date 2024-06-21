@@ -6,7 +6,7 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 21:19:48 by ooulcaid          #+#    #+#             */
-/*   Updated: 2024/06/21 18:09:12 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:53:11 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	set_space(t_map **map, int i)
 
 int	fill_one(t_cub3d *cub, t_map **map, t_line *line, int min)
 {
-	static int b;
 	int	i;
 
 	i = 0;

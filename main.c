@@ -6,7 +6,7 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 10:02:16 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/21 17:39:56 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/21 23:02:32 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,19 @@ int	main(int ac, char **av)
 {
 	t_cub3d	cub;
 
-	(void)ac;
-	// (void)av;
-	// if (ac != 2)
-	// 	return (printf("Error\nbad number of arguments"), 1);
+	if (ac != 2)
+		return (printf("Error\nbad number of arguments"), 1);
 	initialize_data(&cub);
 	if (!file_parse(&cub, av[1]))
 		return (2);
+	printf("NO : file -> %s\n", cub.tex[0].file);
+	printf("SO : file -> %s\n", cub.tex[1].file);
+	printf("WE : file -> %s\n", cub.tex[2].file);
+	printf("EA : file -> %s\n", cub.tex[3].file);
+	printf("F -> RGB(%d, %d, %d)\n",cub.floor_color.red, cub.floor_color.green, cub.floor_color.blue);
+	printf("C -> RGB(%d, %d, %d)\n",cub.ceiling_color.red, cub.ceiling_color.green, cub.ceiling_color.blue);
 	int i,j;
 	i = -1;
-	printf("%d\n", cub.map_width);
 	while (++i < cub.map_height)
 	{
 		j = -1;
@@ -65,7 +68,6 @@ int	main(int ac, char **av)
 			printf("%d ",cub.map[i][j].v);
 		puts("\n");
 	}
-	// puts(cub.tex[1].file);
 	// init_doors(&cub);
 	// if (init_window(&cub))
 		return (0);

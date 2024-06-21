@@ -6,7 +6,7 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:29:12 by ooulcaid          #+#    #+#             */
-/*   Updated: 2024/06/21 17:20:22 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/21 22:58:53 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	parse_map(t_cub3d *cub)
 	t_line	*c_line;
 	t_line	*p_line;
 
-	if (!all_ones(cub->line->line))
-		return (0);
 	p_line = cub->line;
+	if (!all_ones(p_line->line))
+		return (0);
 	while (p_line->next)
 	{
 		c_line = p_line->next;
@@ -78,7 +78,7 @@ int	valid_map(t_cub3d *cub, int fd)
 
 	line = get_next_line(fd);
 	while (line && empty(line))
-		line = get_next_line(fd);
+		(free(line), line = get_next_line(fd));
 	while (line)
 	{
 		if (!parse_line(line, &first, &last))
@@ -110,6 +110,7 @@ int	headers_parse(t_cub3d *cub, int fd)
 				return (0);
 			i++;
 		}
+		free(line);
 		if (i < 6) //in order to not lose the offset of the first line of map
 			line = get_next_line(fd);
 	}
@@ -125,9 +126,9 @@ int	file_parse(t_cub3d *cub, char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (putendl_fd("error\nfail to open file", 2), 0);
-	// if (!headers_parse(cub, fd))
-	// 	return (putendl_fd("Error\nnot valid Headers", 2), 0);
+	if (!headers_parse(cub, fd))
+		return (putendl_fd("Error\nnot valid Headers", 2), 0);
 	if (!valid_map(cub, fd))
 		return (putendl_fd("Error\nnot a valid map", 2), 0);
-	return (1);
+	return (close(fd), 1);
 }
