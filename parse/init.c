@@ -88,14 +88,14 @@ int	init_doors(t_cub3d *cub)
 		exit(1);
 	}
 
-	cub->mapS = talloc(&cub->heap, sizeof(t_map **) * cub->map_height), _MAL_CALL_INFO();
-	if (!cub->mapS) {
+	cub->map = talloc(&cub->heap, sizeof(t_map **) * cub->map_height), _MAL_CALL_INFO();
+	if (!cub->map) {
 		perror("malloc ");
 		exit(1);
 	}
 	for (int i = 0; i < cub->map_height; i++) {
-		cub->mapS[i] = talloc(&cub->heap, sizeof(t_map *) * cub->map_width); _MAL_CALL_INFO();
-		if (!cub->mapS[i]) {
+		cub->map[i] = talloc(&cub->heap, sizeof(t_map *) * cub->map_width); _MAL_CALL_INFO();
+		if (!cub->map[i]) {
 			perror("malloc");
 			exit(1);
 		}
@@ -126,24 +126,24 @@ int	init_doors(t_cub3d *cub)
 		str[cub->map_width + 1] = '\0';
 		for (int j = 0; j < cub->map_width; j++) {
 			// cub->map[i][j] = str[j] - 48;
-			cub->mapS[i][j].v = str[j] - 48;
-			if (cub->mapS[i][j].v == 0)
-				cub->mapS[i][j].wall = false;
+			cub->map[i][j].v = str[j] - 48;
+			if (cub->map[i][j].v == 0)
+				cub->map[i][j].wall = false;
 			else
-				cub->mapS[i][j].wall = true;
-			if (cub->mapS[i][j].v == 2)
+				cub->map[i][j].wall = true;
+			if (cub->map[i][j].v == 2)
 			{
-				cub->mapS[i][j].door = true;
-				// cub->mapS[i][j].door_s = new_door(cub, i, j);
+				cub->map[i][j].door = true;
+				// cub->map[i][j].door_s = new_door(cub, i, j);
 			}
 			else
-				cub->mapS[i][j].door = false;
+				cub->map[i][j].door = false;
 		}
 	}
 
 	// for (int i = 0; i < cub->map_height; i++) {
 	// 	for (int j = 0; j < cub->map_width; j++) {
-	// 		printf("[%d %d %d]", cub->mapS[i][j].v,  cub->mapS[i][j].door,  cub->mapS[i][j].wall);
+	// 		printf("[%d %d %d]", cub->map[i][j].v,  cub->map[i][j].door,  cub->map[i][j].wall);
 	// 	}
 	// 	printf("\n");
 	// }

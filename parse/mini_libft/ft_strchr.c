@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ooulcaid <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 20:25:41 by ooulcaid          #+#    #+#             */
-/*   Updated: 2023/10/30 20:25:44 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/21 16:45:06 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
+#include "../../include/cub3d.h"
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -30,9 +31,3 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)p + i);
 	return (NULL);
 }
-/*
-int	main ()
-{
-	char t[] = "teste";
-	printf("%p,%p\n",t,  ft_strchr(t, 357));
-}*/

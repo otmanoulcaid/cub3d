@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_processing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 12:27:54 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/11 12:29:34 by tamehri          ###   ########.fr       */
+/*   Updated: 2024/06/21 10:26:01 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	update_map(t_cub3d *cub)
 	{
 		y = -1;
 		while (++y < cub->map_width)
-			cub->mapS[x][y].visited = false;
+			cub->map[x][y].visited = false;
 	}
 }
 

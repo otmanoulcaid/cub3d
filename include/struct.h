@@ -6,7 +6,7 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 10:04:08 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/20 21:55:28 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/21 15:31:20 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ struct s_line
 	int		last;
 	char	*line;
 	t_line	*next;
-}
+};
 
 struct s_map
 {
@@ -154,7 +154,7 @@ struct s_sprite
 /*--------------------------- Main Struct -------------------------------*/
 struct s_cub3d
 {
-	t_map		**mapS;
+	t_map		**map;
 	t_color		floor_color;
 	t_color		ceiling_color;
 	t_heap		*heap;

@@ -6,95 +6,77 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:26:58 by ooulcaid          #+#    #+#             */
-/*   Updated: 2024/06/20 20:42:05 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/21 17:41:49 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/struct.h"
+#include "../include/cub3d.h"
 
-int all_ones(char *line)
+int	all_ones(char *line)
 {
-    while (*line && *line == '1')
-        line++;
-    return (!*line);
+	line = ft_strtrim(line, " ");
+	while (*line && *line == '1')
+		line++;
+	return (*line == '\n' || !*line);
 }
 
-int parse_line(char *line, int *off, int *last)
+int	check_first(t_line *line, int nb_chars)
 {
-    static  int bol;
-    int         i;
-    
-    i = 0;
-    while (line[i] && line[i] == ' ')
-        i++;
-    *off = i;
-    while (line[i])
-    {
-        while (line[i] && valid_char(line[i]) && line[i] != ' ')
-        {
-            if (line[i] != '1' && line[i] != '0')
-                bol++;
-            i++;
-        }
-        if (bol > 1 || (line[i] && line[i] != ' ' && !valid_char(line[i])))
-            return (0);
-        *last = i - 1;
-        while (line[i] && line[i] == ' ')
-            i++;
-    }
-    return (1);
+	int	i;
+
+	i = 0;
+	while (i < nb_chars && line->line[i + line->off] == '1')
+		i++;
+	return (i == nb_chars);
 }
 
-int parse_map(t_cub3d *cub)
+int	check_last(t_line *line, int nb_chars)
 {
-    t_line  *c_line;
-    t_line  *p_line;
-  
-    if (!all_ones(cub->line->line))
-        return (0);
-    p_line = cub->line;
-    while (p_line->next)
-    {
-        c_line = p_line->next;
-        if (c_line->off < p_line->last && (!check_last(p_line->line, \
-        p_line->last - c_line->off) || !check_first(c_line->line, \
-        p_line->last - c_line->off)))
-            return (0);
-        if (c_line->off > p_line->last && (!check_last(c_line->line, \
-        p_line->last - c_line->off) || !check_first(p_line->line, \
-        p_line->last - c_line->off)))
-            return (0);
-        if (c_line->line[c_line->off] != 1 && c_line->line[c_line->last] != 1)
-            return (0);
-        p_line = c_line;
-        c_line = c_line->next;
-    }
-    return (all_ones(cub->line->line));
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(line->line);
+	while (i < nb_chars && line->line[len - 2 - i] == '1')
+		i++;
+	return (i == nb_chars);
 }
 
-int valid_map(t_cub3d *cub, int fd)
+int	wall_exist(int front, int less, t_line *c_line, t_line *p_line)
 {
-    char    *line;
-    t_line  *node;
-    int     first;
-    int     last;
-
-    line = get_next_line(fd);
-    while (line && empty(line))
-        line = get_next_line(fd);
-    while (line)
-    {
-        if (!parse_line(line->line, &first, &last))
-            return (0);
-        node = new_line(line, first, last)
-        if (!node)
-            return (0);
-        line_add_back(&cub->line, line);
-        cub->map_height++;
-        line = get_next_line(fd);
-    }
-    if (cub->map_height < 3)
-        return (0);
-    return (parse_map(cub) && get_map_cord(cub));
+	if (front)
+	{
+		if (less)
+			return (check_first(c_line, p_line->off - c_line->off));
+		return (check_first(p_line, c_line->off - p_line->off));
+	}
+	else
+	{
+		if (less)
+			return (check_last(p_line, p_line->last - c_line->last));
+		return (check_last(c_line, c_line->last - p_line->last));
+	}
 }
 
+int	get_map_cord(t_cub3d *cub)
+{
+	int		i;
+	t_line	*line;
+	int		min;
+	int		max;
+
+	(get_min_max(cub->line, &min, &max), cub->map_width = max - min + 1);
+	cub->map = talloc(&cub->heap, sizeof(t_map *) * cub->map_height);
+	i = 0;
+	while (i < cub->map_height)
+		(cub->map)[i++] = talloc(&cub->heap, sizeof(t_map) * cub->map_width);
+	line = cub->line;
+	i = 0;
+	while (line)
+	{
+		if (!fill_one(cub, cub->map + i++, line, min))
+			return (0);
+		line = line->next;
+	}
+	return (1);
+}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   doors.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 09:58:23 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/10 20:53:54 by tamehri          ###   ########.fr       */
+/*   Updated: 2024/06/21 10:26:01 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 bool	is_door(t_cub3d *cub, int x, int y)
 {
 	if (x >= 0 && x < cub->map_height && y >= 0 && y < cub->map_width)
-		return (cub->mapS[x][y].door);
+		return (cub->map[x][y].door);
 	return (false);
 }
 

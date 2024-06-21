@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 17:28:53 by ooulcaid          #+#    #+#             */
-/*   Updated: 2023/11/03 22:10:17 by ooulcaid         ###   ########.fr       */
+/*   Created: 2023/10/30 13:56:31 by ooulcaid          #+#    #+#             */
+/*   Updated: 2024/06/21 10:30:45 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*l;
+#include "../../include/cub3d.h"
 
-	l = *lst;
-	if (!l)
-		*lst = new;
-	else
-	{
-		while (l->next)
-			l = l->next;
-		l->next = new;
-	}
-}
+// char	*ft_strdup(const char *s1)
+// {
+// 	char	*s2;
+// 	size_t	i;
+
+// 	i = 0;
+// 	s2 = (char *)malloc((ft_strlen((char *)s1) + 1) * sizeof(char));
+// 	if (!s2)
+// 		return (NULL);
+// 	while (*(s1 + i))
+// 	{
+// 		*(s2 + i) = *(s1 + i);
+// 		i++;
+// 	}
+// 	*(s2 + i) = '\0';
+// 	return (s2);
+// }

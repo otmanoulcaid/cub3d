@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/31 17:43:52 by ooulcaid          #+#    #+#             */
-/*   Updated: 2023/11/03 22:10:15 by ooulcaid         ###   ########.fr       */
+/*   Created: 2023/10/30 13:55:42 by ooulcaid          #+#    #+#             */
+/*   Updated: 2024/06/21 16:44:55 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+int	ft_atoi(const char *s)
 {
-	t_list	*l;
+	int	n;
+	int	sign;
 
-	if (!lst || !del)
-		return ;
-	while (*lst)
+	sign = 1;
+	n = 0;
+	while (*s == ' ' || (*s >= 9 && *s <= 13))
+		s++;
+	if (*s == '+' || *s == '-')
 	{
-		l = (*lst)->next;
-		del((*lst)->content);
-		free(*lst);
-		*lst = l;
+		if (*s == '-')
+			sign = -1;
+		s++;
 	}
-	*lst = NULL;
+	while (*s <= '9' && *s >= '0')
+	{
+		n = (n * 10) + *s - '0';
+		s++;
+	}
+	return (n * sign);
 }

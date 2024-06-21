@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:21:02 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/11 22:46:24 by tamehri          ###   ########.fr       */
+/*   Updated: 2024/06/21 10:26:01 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_wall(t_cub3d *cub, int x, int y)
 {
 	if (x >= 0 && x < cub->map_height && y >= 0 && y < cub->map_width)
-		return (cub->mapS[x][y].wall);
+		return (cub->map[x][y].wall);
 	return (0);
 }
 
@@ -64,7 +64,7 @@ static int	door_hit(t_cub3d *cub, t_ray *ray, int x, int y)
 
 static int	hit(t_cub3d *cub, t_ray *ray, int x, int y)
 {
-	cub->mapS[x][y].visited = true;
+	cub->map[x][y].visited = true;
 	if (is_door(cub, x, y))
 		return (door_hit(cub, ray, x, y));
 	else if (is_wall(cub, x, y))

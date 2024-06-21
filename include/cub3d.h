@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 10:04:05 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/11 22:46:56 by tamehri          ###   ########.fr       */
+/*   Updated: 2024/06/21 16:42:58 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,19 @@
 
 # include <math.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
-// # include "../MLX/mlx.h"
-# include "../minilibx-linux/mlx.h"
-# include "../minilibx-linux/mlx_int.h"
+# include "../MLX/mlx.h"
+// # include "../minilibx-linux/mlx.h"
+// # include "../minilibx-linux/mlx_int.h"
 # include "struct.h"
 # include "macro.h"
 
 # ifdef Z
 #  define _MAL_CALL_INFO() \
-    printf("\t\tFile: \033[35m%s\033[0m, Line: \033[35m%d\033[0m, Function: \033[35m%s\033[0m\n", __FILE__, __LINE__, __func__)
+	printf("\t\tFile: \033[35m%s\033[0m, Line: \033[35m%d\033[0m, Function: \033[35m%s\033[0m\n", __FILE__, __LINE__, __func__)
 # endif
 
 # ifndef Z
@@ -74,5 +75,34 @@ void	put_rays(t_cub3d *cub);
 void	minimap(t_cub3d *cub);
 int		set_color(bool flag, int value);
 int		update_frame(void *param);
+
+/*--------------------parser-------------------*/
+int     get_map_cord(t_cub3d *cub);
+int		file_parse(t_cub3d *cub, char *file);
+void	line_add_back(t_line **line, t_line *node);
+void	get_min_max(t_line *line, int *min, int *max);
+t_line  *new_line(t_cub3d *cub, char *line, int off, int last);
+int		fill_one(t_cub3d *cub, t_map **map, t_line *line, int min);
+
+//bools
+int     is_num(char c);
+int     empty(char *line);
+int     all_num(char *str);
+int		all_ones(char *line);
+int     valid_char(char line);
+int		valid_component(t_cub3d *cub, char *line);
+int		wall_exist(int front, int less, t_line *c_line, t_line *p_line);
+//mini_libft
+
+char	*get_next_line(int fd);
+int		ft_atoi(const char *s);
+int		ft_strlen(const char *s);
+int     ft_strcmp(char *s1, char *s2);
+char	*ft_strchr(const char *s, int c);
+char	**ft_split(char const *s, char c);
+char	*ft_strrchr(const char *s, int c);
+char	*ft_strtrim(char const *s1, char const *set);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif

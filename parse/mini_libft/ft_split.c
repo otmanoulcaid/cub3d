@@ -6,10 +6,11 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 22:26:36 by ooulcaid          #+#    #+#             */
-/*   Updated: 2023/11/03 22:33:59 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/21 09:43:28 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
+#include "../../include/cub3d.h"
 
 static int	count(char const *s, char c)
 {

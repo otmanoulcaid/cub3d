@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ooulcaid <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:18:21 by ooulcaid          #+#    #+#             */
-/*   Updated: 2023/10/31 11:28:47 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/21 16:45:18 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/cub3d.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -31,7 +31,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	while (*s1)
 		*(s + i++) = *s1++;
-	while (*s2) 
+	while (*s2)
 	{
 		*(s + i++) = *s2;
 		s2++;
@@ -39,13 +39,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	*(s + i) = '\0';
 	return (s);
 }
-/*
-#include <stdio.h>
-#include <string.h>
-
-int main()
-{
-//	printf("%lu\n",strlen(NULL));
-	printf("%s",ft_strjoin("hello",NULL));
-}
-*/

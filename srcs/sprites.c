@@ -2,7 +2,7 @@
 
 bool	is_visible(t_cub3d *cub, int x, int y)
 {
-	return (cub->mapS[x][y].visited);
+	return (cub->map[x][y].visited);
 }
 
 void	transform_sprite(t_cub3d *cub, double *trans_x, double *trans_y)

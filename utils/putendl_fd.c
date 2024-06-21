@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   putendl_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 12:55:29 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/09 21:04:58 by tamehri          ###   ########.fr       */
+/*   Updated: 2024/06/21 09:51:47 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ void	putendl_fd(char *s, int fd)
 	while (*s)
 		write(fd, s++, 1);
 	write(fd, "\n", 1);
-}
-
-size_t	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (*(str + i))
-		i++;
-	return (i);
 }
 
 char	*ft_strdup(const char *s1)

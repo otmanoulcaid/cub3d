@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ooulcaid <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:29:34 by ooulcaid          #+#    #+#             */
-/*   Updated: 2023/10/31 16:45:22 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/21 16:46:03 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
+#include "../../include/cub3d.h"
 
 static int	len(const char *s)
 {
@@ -52,7 +53,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return ((char *)s1);
 	if (!s1)
 		return (NULL);
-	i = 0; 
+	i = 0;
 	while (*(s1 + i) && is_in(*(s1 + i), set))
 		i++;
 	if (!*(s1 + i))
@@ -67,9 +68,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	*(str + j) = '\0';
 	return (str);
 }
-/*
-#include <stdio.h>
- int main(int ac , char **av)
- {
- 	printf("%s", ft_strtrim("hello world ", "deh "));
- }*/

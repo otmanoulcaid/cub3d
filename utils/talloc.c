@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   talloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 12:54:58 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/11 22:07:30 by tamehri          ###   ########.fr       */
+/*   Updated: 2024/06/21 14:39:51 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_heap	*heapnew(void *content)
 	if (!head)
 		return (NULL);
 	head->ptr = content;
+	head->next = NULL;
 	return (head);
 }
 

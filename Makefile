@@ -15,21 +15,38 @@ SRC			=		./main.c       \
 					./srcs/window_handling.c \
 					./srcs/doors.c \
 					./srcs/sprites.c \
-					./parse/init.c
+					./parse/init.c \
+					./parse/list_op.c\
+					./parse/parse_header.c\
+					./parse/fill_data.c\
+					./parse/parse_map.c\
+					./parse/bools.c\
+					./parse/parse.c\
+					./gnl/get_next_line.c\
+					./gnl/get_next_line_utils.c\
+					./parse/mini_libft/ft_atoi.c\
+					./parse/mini_libft/ft_strjoin.c\
+					./parse/mini_libft/ft_strrchr.c\
+					./parse/mini_libft/ft_split.c\
+					./parse/mini_libft/ft_strlen.c\
+					./parse/mini_libft/ft_strtrim.c\
+					./parse/mini_libft/ft_strchr.c\
+					./parse/mini_libft/ft_strncmp.c\
+					./parse/mini_libft/ft_substr.c\
+					./parse/mini_libft/ft_strdup.c\
 
 CC			=	cc
 NAME		=	cub3D
 HEADER		=	include/cub3d.h include/struct.h
 OBJ			=	$(SRC:.c=.o)
 CFLAGS		=	-Wall -Wextra -Werror -g
-# MLXFLAGS	=	-L./MLX -l mlx -framework OpenGL -framework AppKit
-MLXFLAGS_L	=	-L./minilibx-linux -lmlx -lXext -lX11 -lm -lbsd
+MLXFLAGS	=	-L./MLX -l mlx -framework OpenGL -framework AppKit
 
 
 all: $(NAME)
 	
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(MLXFLAGS_L) $(MLXFLAGS)
+	@$(CC) -g $(CFLAGS) $(OBJ) -o $(NAME) $(MLXFLAGS_L) $(MLXFLAGS)
 
 %.o: %.c $(HEADER)
 	@$(CC) $(CFLAGS) -c $< -o $@ 

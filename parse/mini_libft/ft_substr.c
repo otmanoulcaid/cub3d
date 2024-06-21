@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ooulcaid <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:09:23 by ooulcaid          #+#    #+#             */
-/*   Updated: 2023/11/03 00:32:44 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/21 16:46:18 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
+#include "../../include/cub3d.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -26,7 +27,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (len > l - start)
 		buff = l - start;
-	else 
+	else
 		buff = len;
 	t = (char *)malloc((buff + 1) * sizeof(char));
 	if (!t)
