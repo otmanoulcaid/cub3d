@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_header.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:24:39 by ooulcaid          #+#    #+#             */
-/*   Updated: 2024/06/21 22:55:03 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:49:39 by tamehri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	parse_color(t_color *color, char *line)
 {
 	char	**splited;
 
-	if (!is_num(line[ft_strlen(line) - 2]))
+	if (!is_num(line[ft_strlen(line) - 1]))
 		return (0);
 	splited = ft_split(line, ',');
 	if (count(splited) != 3 && (!all_num(ft_strtrim(splited[0], " ")) \
@@ -67,7 +67,7 @@ int	valid_component(t_cub3d *cub, char *line)
 		return (parse_color(&cub->floor_color, ft_strchr(trim, ' ')));
 	if (!ft_strncmp(trim, "C ", 2))
 		return (parse_color(&cub->ceiling_color, ft_strchr(trim, ' ')));
-	return (free(trim), 0);
+	return (0);
 }
 
 int	empty(char *str)

@@ -6,16 +6,18 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 21:19:48 by ooulcaid          #+#    #+#             */
-/*   Updated: 2024/06/21 20:53:11 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:40:49 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	set_door(t_map **map, int i)
+void	set_door_sprite(t_map **map, int i, int c)
 {
-	(*map + i)->v = 2;
-	(*map + i)->door = true;
+	(*map + i)->v = c - 48;
+	(*map + i)->door = false;
+	if ((*map + i)->v == 2)
+		(*map + i)->door = true;
 	(*map + i)->wall = false;
 	(*map + i)->visited = false;
 }
@@ -41,16 +43,17 @@ int	fill_one(t_cub3d *cub, t_map **map, t_line *line, int min)
 	int	i;
 
 	i = 0;
-	while (line->line[i + min] && line->line[i + min] != '\n')
+	while (line->line[i + min] && line->line[i + min] \
+		!= '\n' && i < cub->map_width)
 	{
 		if (line->line[i + min] == ' ' || line->line[i + min] == '1')
-			set_wall(map, i);
-		else if (line->line[i + min] == '2')
-			set_door(map, i);
+			(set_wall(map, i));
+		else if (line->line[i + min] == '2' || line->line[i + min] == '3')
+			set_door_sprite(map, i, line->line[i + min]);
 		else if (line->line[i + min] == '0')
 			set_space(map, i);
 		else
-			(set_space(map, i), cub->player.pole = line->line[i + min]);
+			cub->map[line->y][i].v = line->line[i + min];
 		i++;
 	}
 	while (i < cub->map_width)

@@ -6,7 +6,7 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 11:09:23 by ooulcaid          #+#    #+#             */
-/*   Updated: 2024/06/21 16:46:18 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:25:35 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		buff = l - start;
 	else
 		buff = len;
-	t = (char *)malloc((buff + 1) * sizeof(char));
+	t = (char *)talloc((buff + 1) * sizeof(char));
 	if (!t)
 		return (NULL);
 	while (i < len && *(s + start + i))
@@ -40,10 +40,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	*(t + i) = '\0';
 	return (t);
 }
-/*
-#include <stdio.h>
-
-int main ()
-{
-	printf("%s\n", ft_substr("hola", 0, 18446744073709551615));
-}*/
