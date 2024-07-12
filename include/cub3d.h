@@ -6,7 +6,7 @@
 /*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 13:13:44 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/25 20:32:28 by ooulcaid         ###   ########.fr       */
+/*   Updated: 2024/07/12 08:47:21 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@
 /*--------------------parser-------------------*/
 int				parse_map(t_cub3d *cub);
 int				get_map_cord(t_cub3d *cub);
-int				file_parse(t_cub3d *cub, char *file);
 int				check_arround(t_line *line, int i);
+int				file_parse(t_cub3d *cub, char *file);
+int				check_last(t_line *line, int nb_chars);
 t_line			*new_line(char *line, int off, int last);
 void			line_add_back(t_line **line, t_line *node);
 void			get_min_max(t_line *line, int *min, int *max);
