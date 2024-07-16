@@ -6,7 +6,7 @@
 /*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 20:04:00 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/25 17:26:31 by tamehri          ###   ########.fr       */
+/*   Updated: 2024/07/10 09:54:43 by tamehri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static char	*get_name(int c, bool f)
 
 	i = -1;
 	name = talloc(sizeof(char) * 21);
-	if (!name)
-		return (NULL);
 	prename = ft_strdup("assets/sprite/");
 	postname = ft_strdup(".xpm");
 	while (*(prename + ++i))
@@ -68,13 +66,21 @@ static void	init_xpm(t_cub3d *cub)
 		a, a + 1);
 	cub->mlx.__menu = create_image("assets/ui/controls.xpm", \
 		a, a + 1);
-	cub->tex[4].img.__img = create_image("assets/nova/door.xpm", \
+	cub->tex[4].img.__img = create_image("assets/nova/blue_door.xpm", \
 		&cub->tex[4].img.width, &cub->tex[4].img.height);
 	cub->tex[4].img.__addr = \
 		(int *)mlx_get_data_addr(cub->tex[4].img.__img, \
 		&cub->tex[4].img.pixel_bits, &cub->tex[4].img.line_bytes, \
 		&cub->tex[4].img.endian);
 	if (!cub->tex[4].img.__addr)
+		terror(ERR_MLX_ADDRESS);
+	cub->tex[5].img.__img = create_image("assets/nova/orange_door.xpm", \
+		&cub->tex[5].img.width, &cub->tex[5].img.height);
+	cub->tex[5].img.__addr = \
+		(int *)mlx_get_data_addr(cub->tex[5].img.__img, \
+		&cub->tex[5].img.pixel_bits, &cub->tex[5].img.line_bytes, \
+		&cub->tex[5].img.endian);
+	if (!cub->tex[5].img.__addr)
 		terror(ERR_MLX_ADDRESS);
 	init_sprites(cub);
 }

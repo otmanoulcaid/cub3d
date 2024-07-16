@@ -6,7 +6,7 @@
 /*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:03:27 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/25 17:30:27 by tamehri          ###   ########.fr       */
+/*   Updated: 2024/07/05 11:07:20 by tamehri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,12 @@ static void	put_minimap(t_cub3d *cub)
 		y = -1;
 		while (++y < cub->map_width)
 		{
-			if (is_wall(cub, x, y) && !is_door(cub, x, y))
+			if (is_wall(x, y) || is_door(x, y))
 			{
-				set_color(true, WHITE);
+				if (is_wall(x, y))
+					set_color(true, WHITE);
+				else
+					set_color(true, CYAN);
 				x_n = y;
 				y_n = x;
 				put_block((x_n - cub->player.pos.y) * cub->wall_width + 140, \
@@ -86,7 +89,7 @@ static void	put_dir_rays(t_cub3d *cub)
 	{
 		end.x = start.x + 100 * dir.x;
 		end.y = start.y + 100 * dir.y;
-		draw_line(&start, &end, &cub->img);
+		draw_line(&start, &end);
 		rotate_vector(&dir, PI_1);
 	}
 }

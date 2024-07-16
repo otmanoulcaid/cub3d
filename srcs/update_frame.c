@@ -6,7 +6,7 @@
 /*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 17:00:29 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/25 13:59:07 by tamehri          ###   ########.fr       */
+/*   Updated: 2024/07/11 20:19:09 by tamehri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ static void	put_background(t_cub3d *cub)
 		h = -1;
 		set_color(1, rgb_to_hex(cub->ceiling_color));
 		while (++h < HEIGHT / 2)
-			my_mlx_pixel_put(w, h, &cub->img);
+			my_mlx_pixel_put(w, h);
 		set_color(1, rgb_to_hex(cub->floor_color));
 		while (++h < HEIGHT)
-			my_mlx_pixel_put(w, h, &cub->img);
+			my_mlx_pixel_put(w, h);
 	}
 }
 
@@ -69,6 +69,7 @@ int	update_frame(void *param)
 			cub->mlx.__win, cub->mlx.__menu, 0, 0);
 	else if (cub->mode == GAME)
 	{
+		update_hooks(cub);
 		update_doors(cub);
 		put_background(cub);
 		update_map(cub);
