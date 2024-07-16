@@ -6,7 +6,7 @@
 /*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 13:16:36 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/25 19:40:24 by tamehri          ###   ########.fr       */
+/*   Updated: 2024/07/16 11:48:09 by tamehri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,43 @@ typedef struct s_ray			t_ray;
 typedef struct s_map			t_map;
 typedef enum e_dir				t_dir;
 typedef struct s_tex			t_tex;
+typedef struct s_keys			t_keys;
 typedef struct s_vect			t_vect;
 typedef struct s_door			t_door;
+typedef enum e_hooks			t_hooks;
 typedef struct s_image			t_image;
 typedef struct s_sprite			t_sprite;
 typedef struct s_player			t_player;
 typedef struct s_imgcontainer	t_imgcontainer;
 
+enum e_hook
+{
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
+
 struct s_imgcontainer
 {
 	void			*image;
 	t_imgcontainer	*next;
+};
+
+struct s_keys
+{
+	bool	space;
+	bool	right;
+	bool	left;
+	bool	esc;
+	bool	w;
+	bool	d;
+	bool	s;
+	bool	a;
+	bool	q;
 };
 
 struct s_line
@@ -119,7 +145,7 @@ struct s_image
 enum e_dir
 {
 	NORTH = 'N',
-	EASTH = 'E',
+	EAST = 'E',
 	SOUTH = 'S',
 	WEST = 'W',
 };
@@ -167,7 +193,7 @@ struct s_cub3d
 	t_color			ceiling_color;
 	t_image			sprite_img[40];
 	t_imgcontainer	*imgcontainer;
-	t_tex			tex[5];
+	t_tex			tex[6];
 	t_mlx			mlx;
 	t_image			img;
 	int				frame;
@@ -179,6 +205,7 @@ struct s_cub3d
 	t_door			*doors;
 	t_heap			*heap;
 	t_line			*line;
+	t_keys			keys;
 
 	int				player_nbr;
 	int				mode;
@@ -187,5 +214,10 @@ struct s_cub3d
 	int				map_height;
 	int				wall_width;
 };
+
+void		update_hooks(t_cub3d *cub);
+int			check_last(t_line *line, int nb_chars);
+int			key_up(int key, t_cub3d *cub);
+int			key_down(int key, t_cub3d *cub);
 
 #endif

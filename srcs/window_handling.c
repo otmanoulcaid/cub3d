@@ -6,7 +6,7 @@
 /*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 16:49:03 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/25 17:31:02 by tamehri          ###   ########.fr       */
+/*   Updated: 2024/07/11 20:07:15 by tamehri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	init_mlx(t_cub3d *cub)
 	cub->mlx.__mlx = mlx_init();
 	if (!cub->mlx.__mlx)
 		terror(ERR_MLX_INIT);
-	cub->mlx.__win = mlx_new_window(cub->mlx.__mlx, WIDTH, HEIGHT, "cub3d");
+	cub->mlx.__win = mlx_new_window(cub->mlx.__mlx, WIDTH, HEIGHT, "cub3D");
 	if (!cub->mlx.__win)
 		terror(ERR_MLX_WIN);
 	cub->img.__img = mlx_new_image(cub->mlx.__mlx, WIDTH, HEIGHT);
@@ -30,15 +30,15 @@ static void	init_mlx(t_cub3d *cub)
 	init_textures(cub);
 }
 
-int	init_window(t_cub3d *cub)
+void	init_window(t_cub3d *cub)
 {
 	init_mlx(cub);
 	mlx_loop_hook(cub->mlx.__mlx, update_frame, cub);
-	mlx_hook(cub->mlx.__win, 2, 0, handle_key, cub);
-	mlx_hook(cub->mlx.__win, 6, 0, mouse_move, cub);
-	mlx_hook(cub->mlx.__win, 4, 0, mouse_press, cub);
-	mlx_hook(cub->mlx.__win, 5, 0, mouse_release, cub);
-	mlx_hook(cub->mlx.__win, 17, 0, exit_program, cub);
+	mlx_hook(cub->mlx.__win, ON_KEYUP, 0, key_up, cub);
+	mlx_hook(cub->mlx.__win, ON_KEYDOWN, 0, key_down, cub);
+	mlx_hook(cub->mlx.__win, ON_MOUSEMOVE, 0, mouse_move, cub);
+	mlx_hook(cub->mlx.__win, ON_MOUSEDOWN, 0, mouse_press, cub);
+	mlx_hook(cub->mlx.__win, ON_MOUSEUP, 0, mouse_release, cub);
+	mlx_hook(cub->mlx.__win, ON_DESTROY, 0, exit_program, cub);
 	mlx_loop(cub->mlx.__mlx);
-	return (0);
 }

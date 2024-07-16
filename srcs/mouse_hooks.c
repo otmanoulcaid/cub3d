@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ooulcaid <ooulcaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 16:57:46 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/25 20:09:06 by tamehri          ###   ########.fr       */
+/*   Updated: 2024/07/12 10:27:46 by ooulcaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	set_direction(t_cub3d *cub)
 		if (cub->player.dir.y < 0)
 			cub->player.pole = WEST;
 		else
-			cub->player.pole = EASTH;
+			cub->player.pole = EAST;
 	}
 	else
 	{
@@ -75,8 +75,8 @@ int	mouse_press(int button, int x, int y, void *param)
 	if (button == 1 && x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
 		cub->button = 1;
 	else if (button == 4)
-		move_player(S, cub);
+		move_player(cub);
 	else if (button == 5)
-		move_player(W, cub);
+		move_player(cub);
 	return (0);
 }

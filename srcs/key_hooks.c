@@ -6,67 +6,50 @@
 /*   By: tamehri <tamehri@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 16:53:19 by tamehri           #+#    #+#             */
-/*   Updated: 2024/06/25 17:28:50 by tamehri          ###   ########.fr       */
+/*   Updated: 2024/07/16 11:51:22 by tamehri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static void	check_for_wall(t_cub3d *cub, t_vect *rotated)
+int	key_up(int key, t_cub3d *cub)
 {
-	t_vect	new_pos;
-
-	new_pos.x = cub->player.pos.x + rotated->x * 0.2;
-	new_pos.y = cub->player.pos.y + rotated->y * 0.2;
-	if (fabs(rotated->x) < fabs(rotated->y))
-	{
-		if (rotated->y < 0)
-			north(cub, &new_pos);
-		else
-			south(cub, &new_pos);
-	}
-	else
-	{
-		if (rotated->x < 0)
-			easth(cub, &new_pos);
-		else
-			west(cub, &new_pos);
-	}
-}
-
-static void	rotate_player(int key, t_cub3d *cub)
-{
+	if (key == SPACE)
+		cub->keys.space = false;
 	if (key == RIGHT)
-	{
-		rotate_vector(&cub->player.dir, -0.0174533 * 4);
-		rotate_vector(&cub->player.plan, -0.0174533 * 4);
-	}
-	else if (key == LEFT)
-	{
-		rotate_vector(&cub->player.dir, 0.0174533 * 4);
-		rotate_vector(&cub->player.plan, 0.0174533 * 4);
-	}
-	set_direction(cub);
-}
-
-void	move_player(int key, t_cub3d *cub)
-{
-	t_vect	rotated;
-
-	rotated.x = cub->player.dir.x;
-	rotated.y = cub->player.dir.y;
+		cub->keys.right = false;
+	if (key == LEFT)
+		cub->keys.left = false;
 	if (key == W)
-		rotate_vector(&rotated, 0);
-	else if (key == S)
-		rotate_vector(&rotated, M_PI);
-	else if (key == A)
-		rotate_vector(&rotated, M_PI / 2);
-	else if (key == D)
-		rotate_vector(&rotated, -1 * M_PI / 2);
-	check_for_wall(cub, &rotated);
+		cub->keys.w = false;
+	if (key == D)
+		cub->keys.d = false;
+	if (key == S)
+		cub->keys.s = false;
+	if (key == A)
+		cub->keys.a = false;
+	return (0);
 }
 
-int	handle_key(int key, t_cub3d *cub)
+void	update_keys(int key, t_cub3d *cub)
+{
+	if (key == SPACE)
+		cub->keys.space = true;
+	if (key == RIGHT)
+		cub->keys.right = true;
+	if (key == LEFT)
+		cub->keys.left = true;
+	if (key == W)
+		cub->keys.w = true;
+	if (key == D)
+		cub->keys.d = true;
+	if (key == S)
+		cub->keys.s = true;
+	if (key == A)
+		cub->keys.a = true;
+}
+
+int	key_down(int key, t_cub3d *cub)
 {
 	if (key == Q)
 		exit_program(cub);
@@ -78,11 +61,6 @@ int	handle_key(int key, t_cub3d *cub)
 		cub->mode = MENU;
 	if (cub->mode == INTRO || cub->mode == MENU)
 		return (0);
-	if (key == W || key == S || key == D || key == A)
-		move_player(key, cub);
-	else if (key == RIGHT || key == LEFT)
-		rotate_player(key, cub);
-	else if (key == SPACE)
-		open_doors(cub);
+	update_keys(key, cub);
 	return (0);
 }
